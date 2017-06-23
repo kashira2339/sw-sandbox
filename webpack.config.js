@@ -1,5 +1,5 @@
 /**
- * yarn add node-sass css-loader sass-loader style-loader babel-loader babel-core babel-preset-env webpack webpack-dev-server --dev
+ * yarn add node-sass url-loader css-loader sass-loader style-loader babel-loader babel-core babel-preset-env webpack webpack-dev-server --dev
  */
 
 const distDir = 'assets'
@@ -36,6 +36,17 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
       }
     ]
   }

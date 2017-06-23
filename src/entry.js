@@ -1,9 +1,14 @@
+const registrationIdTextBox = document.getElementById('registration-id')
+
 function subscribeNotification(serviceWorkerRegistration) {
   Notification.requestPermission(() => {
     serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly: true}).then(
       subscription => {
+        const registrationId = subscription.endpoint.replace(/^https:\/\/android.googleapis.com\/gcm\/send\//, '');
+        registrationIdTextBox.value = registrationId;
       },
       error => {
+        console.log(error)
       }
     )
   })
